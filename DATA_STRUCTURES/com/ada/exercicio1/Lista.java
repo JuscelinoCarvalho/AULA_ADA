@@ -8,18 +8,16 @@ public class Lista<T> {
     int tamanho = 0;
 
     public String toString() {
-
         String str = "...................DADOS CONTIDOS NA LISTA...................\n";
         int indice = 1;
-
         ItemListaEncadeada<T> item = primeiroItem;
-
         while (item.getProximo() != null) {
-            str += Integer.toString(indice) + " - "  + item.getDado() + "\n";
-            item = item.getProximo();
+                str += Integer.toString(indice) + " - "  + item.getDado() + "\n";
+                item = item.getProximo();
             indice ++;
         }
-
+        //indice ++;
+        str += Integer.toString(indice) + " - "  + ultimoItem.getDado() + "\n";
         return str;
     }
 
@@ -72,19 +70,25 @@ public class Lista<T> {
     public T get(int posicao) throws Exception {
         this.validateRulesList(posicao);
 
+        ItemListaEncadeada<T> item = new ItemListaEncadeada<>();
+
         if (posicao == 0) return primeiroItem.getDado();
         
-        ItemListaEncadeada<T> item = primeiroItem;
+        
         int fim = tamanho;
         int inicio = 0;
         int meio = fim / 2;
 
         if(posicao > meio){
+            item = ultimoItem;
             for (inicio = fim; inicio > posicao; inicio--) {
+                System.out.println("... checking id:  " + Integer.toString(inicio) );
                 item = item.getAnterior();
             }
         }else{
+            item = primeiroItem;
             for (inicio = 0; inicio < posicao; inicio++){
+                System.out.println("... checking id:  " + Integer.toString(inicio) );
                 item = item.getProximo();
             }
         }
@@ -189,12 +193,13 @@ public class Lista<T> {
         System.out.println(lista.toString());
 
 
-        System.out.println("Busca item com ID 12, que é acima do ID 9 (metade)");
-        lista.get(12).toString();
+        System.out.println("Busca item com ID 12, que é acima do ID 8 (metade)");
+        System.out.println(lista.get(12));
 
+        System.out.println("\n\n");
 
-        //System.out.println("Imprime a Lista reversa: \n");
-        //lista.printListReverse();
+        System.out.println("Busca item com ID 06, que é abaixo do ID 8 (metade)");
+        System.out.println(lista.get(6));
 
     }
 
