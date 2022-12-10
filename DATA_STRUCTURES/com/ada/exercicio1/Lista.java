@@ -76,7 +76,7 @@ public class Lista<T> {
         
         
         int fim = tamanho;
-        int inicio = 0;
+        int inicio;
         int meio = fim / 2;
 
         if(posicao > meio){
@@ -87,10 +87,11 @@ public class Lista<T> {
             }
         }else{
             item = primeiroItem;
-            for (inicio = 0; inicio < posicao; inicio++){
-                System.out.println("... checking id:  " + Integer.toString(inicio) );
+            for (inicio = 1; inicio < posicao; inicio++){
+                System.out.println("... checking id:  " + Integer.toString(inicio));
                 item = item.getProximo();
             }
+            
         }
 
         return item.getDado();
