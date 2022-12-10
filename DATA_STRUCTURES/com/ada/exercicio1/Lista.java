@@ -3,10 +3,32 @@ package com.ada.exercicio1;
 
 public class Lista<T> {
 	
+    ItemListaEncadeada<T> primeiroItem;
+    ItemListaEncadeada<T> ultimoItem;
+    int tamanho = 0;
+
+    public String toString() {
+
+        String str = "...................DADOS CONTIDOS NA LISTA...................\n";
+        int indice = 1;
+
+        ItemListaEncadeada<T> item = primeiroItem;
+
+        while (item.getProximo() != null) {
+            str += Integer.toString(indice) + " - "  + item.getDado() + "\n";
+            item = item.getProximo();
+            indice ++;
+        }
+
+        return str;
+    }
+
 	public class ItemListaEncadeada<K> {
 	    private K dado;
 	    private ItemListaEncadeada<K> anterior;
 	    private ItemListaEncadeada<K> proximo;
+
+
         public K getDado() {
             return dado;
         }
@@ -26,10 +48,6 @@ public class Lista<T> {
             this.proximo = proximo;
         }
 	}
-	
-    ItemListaEncadeada<T> primeiroItem;
-    ItemListaEncadeada<T> ultimoItem;
-    int tamanho = 0;
 
     public Lista() {}
 
@@ -57,13 +75,23 @@ public class Lista<T> {
         if (posicao == 0) return primeiroItem.getDado();
         
         ItemListaEncadeada<T> item = primeiroItem;
+        int fim = tamanho;
+        int inicio = 0;
+        int meio = fim / 2;
 
-        for (int i = 0; i < posicao; i++) {
-            item = item.getProximo();
+        if(posicao > meio){
+            for (inicio = fim; inicio > posicao; inicio--) {
+                item = item.getAnterior();
+            }
+        }else{
+            for (inicio = 0; inicio < posicao; inicio++){
+                item = item.getProximo();
+            }
         }
 
         return item.getDado();
     }
+
     
     private ItemListaEncadeada<T> getItem(int posicao) throws Exception {
         this.validateRulesList(posicao);
@@ -144,14 +172,30 @@ public class Lista<T> {
         lista.add("André");
         lista.add("Ultimo");
         lista.add("Fábio");
+        lista.add("José");
+        lista.add("Maria");
+        lista.add("Joao");
+        lista.add("Afranio");
+        lista.add("Gutenberg");
+        lista.add("Almir");
+        lista.add("Felix");
+        lista.add("Juscelino");
+        lista.add("Samira");
+        lista.add("Luciana");
+        lista.add("Luciene");
+        lista.add("Mariza");
+        lista.add("Teletubies");
 
-        lista.printList();
-        
-        lista.printListReverse();
+        System.out.println(lista.toString());
 
-        //lista.remove(3);
 
-        //lista.printList();
+        System.out.println("Busca item com ID 12, que é acima do ID 9 (metade)");
+        lista.get(12).toString();
+
+
+        //System.out.println("Imprime a Lista reversa: \n");
+        //lista.printListReverse();
+
     }
 
 }
